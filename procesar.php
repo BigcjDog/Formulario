@@ -3,21 +3,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Obtener datos del formulario
     $nombre = $_POST["nombre"] ?? null;
     $apellido = $_POST["apellido"] ?? null;
+    $edad = $_POST["edad"] ?? null;
     $correo = $_POST["correo"] ?? null;
     $curso = $_POST["cursos"] ?? null;
     $genero = $_POST["generos"] ?? null;
     $areas = $_POST["areas"] ?? []; 
 
     
-    if (empty($nombre) || empty($apellido) || empty($correo) || empty($curso) || empty($genero)) {
-        echo "Por favor, completa todos los campos obligatorios.";
-        exit;
+    $clasificacion = "";
+    if ($edad >= 18) {
+        $clasificacion = "Eres mayor de edad"; 
+    } else {
+        $clasificacion = "Eres menor de edad"; 
     }
 
     // Almacenar los datos en un array asociativo
     $datos_usuario = [
         "Nombre" => $nombre,
         "Apellido" => $apellido,
+        "Edad" => $edad,
+        "Clasificacion" => $clasificacion,
         "Correo" => $correo,
         "Curso" => $curso,
         "Género" => $genero,
@@ -38,5 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     echo "Método no permitido.";
 }
 ?>
+
 
 
